@@ -1,0 +1,8 @@
+@ApiGestionEventos_HostAddress = http://localhost:5094
+
+GET {{ApiGestionEventos_HostAddress}}/api/Eventos
+Accept: application/json
+
+###
+GET {{ApiGestionEventos_HostAddress}}/api/Participantes
+Accept: application/json

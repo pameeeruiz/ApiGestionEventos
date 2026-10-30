@@ -1,0 +1,48 @@
+API GESTION DE EVENTOS - VERSION ALTERNATIVA
+================================================
+
+1. Requisitos: Visual Studio compatible con .NET 10 y la carga de trabajo ASP.NET y desarrollo web.
+2. Descomprime y abre ApiGestionEventos.slnx en Visual Studio.
+3. Restaura paquetes NuGet si Visual Studio lo solicita.
+4. La carpeta Migrations y la base de datos eventos.db ya estan incluidas.
+5. Si quieres regenerar eventos.db desde cero, borra eventos.db y ejecuta Update-Database
+   desde Herramientas > Administrador de paquetes NuGet > Consola del Administrador de paquetes.
+   NO ejecutes Add-Migration InitialCreate porque la migracion inicial ya existe.
+6. Ejecuta con F5 y abre la pagina /swagger (perfil http o https).
+
+RUTAS DISPONIBLES
+GET     /api/Eventos
+GET     /api/Eventos/1
+POST    /api/Eventos
+PUT     /api/Eventos/1
+DELETE  /api/Eventos/1
+GET     /api/Participantes
+GET     /api/Participantes/1
+POST    /api/Participantes
+PUT     /api/Participantes/1
+DELETE  /api/Participantes/1
+
+PRUEBA POST /api/Eventos:
+{
+  "nombre": "Congreso de Programacion",
+  "lugar": "Auditorio Central",
+  "fecha": "2026-12-10T09:00:00",
+  "cupoDisponible": 3
+}
+
+PRUEBA POST /api/Participantes:
+{
+  "nombreCompleto": "Sofia Ramirez",
+  "correoElectronico": "sofia@gmail.com",
+  "eventoId": 1
+}
+
+NOTAS
+- Si la base de datos esta vacia, el primer evento creado normalmente tendra Id 1.
+  Compruebalo en la respuesta POST antes de registrar un participante.
+- El POST de participante descuenta un cupo; el DELETE de participante lo devuelve.
+- Al editar un participante para cambiarlo de evento, los cupos se ajustan.
+- No puedes borrar eventos con participantes registrados.
+- Metodos internos async/await y DbContext por inyeccion de dependencias.
+- Respuestas previstas: 200, 201, 204, 400, 404, 409.
+- El proyecto incluye codigo y SQLite, pero la compilacion y la ejecucion deben comprobarse en Visual Studio.
